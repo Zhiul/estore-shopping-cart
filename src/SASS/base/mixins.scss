@@ -1,0 +1,11 @@
+@mixin sm-breakpoint {
+  @media only screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin lg-breakpoint {
+  @media only screen and (min-width: 768px) {
+    @content;
+  }
+}

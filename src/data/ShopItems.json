@@ -1,0 +1,204 @@
+{
+  "items": [
+    {
+      "title": "AMD Ryzen 3 3100",
+      "description": "The AMD Ryzen 3 3100 desktop processor has essential performance for today's top PC games.",
+      "category": "processor",
+      "price": "100",
+      "background": "../assets/Processors/AMD-Ryzen-3-3100.png",
+      "id": "1"
+    },
+    {
+      "title": "AMD Ryzen 5 5600X",
+      "description": "AMD Ryzen 5 5600X gaming desktop processors features 6 incredible cores for those who just want to game.",
+      "category": "processor",
+      "price": "150",
+      "background": "../assets/Processors/AMD-Ryzen-5-5600X.png",
+      "id": "2"
+    },
+    {
+      "title": "AMD Ryzen 5 7600X",
+      "description": "AMD Ryzen 5 7600X is a desktop gaming processor built for intense gaming action that comes with 6 CPU cores, & a base clock speed of 4.7GHz",
+      "category": "processor",
+      "price": "240",
+      "background": "../assets/Processors/AMD-Ryzen-5-7600X.png",
+      "id": "3"
+    },
+    {
+      "title": "AMD Ryzen 7 7700X",
+      "description": "AMD Ryzen 7 7700X is a dominant gaming desktop processor that comes with 8 CPU cores, 16 threads, and a max boost clock speed of up to 5.4 ghz",
+      "category": "processor",
+      "price": "340",
+      "background": "../assets/Processors/AMD-Ryzen-7-7700X.png",
+      "id": "4"
+    },
+    {
+      "title": "AMD Ryzen 9 7950X",
+      "description": "AMD Ryzen 9 7950X is a 16-core powerhouse processor and 32 threads that can do it all for the most demanding gamers and creators.",
+      "category": "processor",
+      "price": "580",
+      "background": "../assets/Processors/AMD-Ryzen-9-7950X.png",
+      "id": "5"
+    },
+    {
+      "title": "Nvidia GeForce RTX 3050",
+      "description": "The GeForce RTX 3050 is built with graphics performance of the NVIDIA Ampere architecture. It offers dedicated 2nd gen RT Cores and 3rd gen Tensor Cores",
+      "category": "gpu",
+      "price": "259",
+      "background": "../assets/GPUS/Nvidia-GeForce-RTX-3050.png",
+      "id": "6"
+    },
+    {
+      "title": "Nvidia GeForce RTX 3060 Ti",
+      "description": "The GeForce RTX TM 3060 Ti and RTX 3060 let you take on the latest games using the power of Ampere NVIDIA's 2nd generation RTX architecture.",
+      "category": "gpu",
+      "price": "399",
+      "background": "../assets/GPUS/Nvidia-GeForce-RTX-3060-Ti.png",
+      "id": "7"
+    },
+    {
+      "title": "AMD Radeon RX 6700 XT",
+      "description": "AMD Radeon RX 6700 XT graphics card has 40 compute units, 12GB of GDDR6 memory, & a game frequency of 2424 Mhz, with powerhouse 1440p resolution gaming.",
+      "category": "gpu",
+      "price": "480",
+      "background": "../assets/GPUS/AMD-Radeon-RX-6700-XT.png",
+      "id": "8"
+    },
+    {
+      "title": "AMD Radeon RX 6750 XT",
+      "description": "AMD Radeon RX 6750 XT graphics card has 40 compute units, 12GB of GDDR6 memory, a game frequency of 2495 Mhz, and an incredible 1440p gaming experience.",
+      "category": "gpu",
+      "price": "550",
+      "background": "../assets/GPUS/AMD-Radeon-RX-6750-XT.png",
+      "id": "9"
+    },
+    {
+      "title": "AMD Radeon RX 7900 XT",
+      "description": "Built on the groundbreaking AMD RDNA™ 3 architecture with chiplet technology, AMD Radeon RX 7900 XT graphics deliver next-generation performance, visuals, and efficiency at 4K and beyond.",
+      "category": "gpu",
+      "price": "900",
+      "background": "../assets/GPUS/AMD-Radeon-RX-7900-XT.png",
+      "id": "10"
+    },
+    {
+      "title": "Crucial RAM 8GB DDR4 3200MHz CL22",
+      "description": "There’s an easy cure for a slow computer: more memory. Designed to help your system run faster and smoother, Crucial Desktop Memory is one of the easiest and most affordable ways to improve your system’s performance.",
+      "category": "ram",
+      "price": "26",
+      "background": "../assets/Memory/Crucial-RAM-8GB.png",
+      "id": "11"
+    },
+    {
+      "title": "Corsair Vengeance RGB Pro SL 16GB (2x8GB)",
+      "description": "High performance memory that illuminate your system with vivid, animated lighting from ten individually addressable, ultra-bright RGB LEDs per module.",
+      "category": "ram",
+      "price": "61",
+      "background": "../assets/Memory/Corsair-Vengeance-RGB-Pro-SL-16GB-(2x8GB).png",
+      "id": "12"
+    },
+    {
+      "title": "T-Force Vulcan Z DDR4 32GB Kit",
+      "description": "T-Force Vulcan Z DDR4 32GB Kit is a high-performance computer memory solution that is designed to provide blazing-fast speed and optimal multitasking capabilities.",
+      "category": "ram",
+      "price": "73",
+      "background": "../assets/Memory/TEAMGROUP-T-Force-Vulcan-Z-DDR4.png",
+      "id": "13"
+    },
+    {
+      "title": "Kingston FURY Beast 64GB (4x16GB) 3200MHz DDR4 CL16",
+      "description": "Kingston FURY Beast DDR4 is the perfect choice for a system builder, or someone looking for an upgrade to jump start their sluggish system.",
+      "category": "ram",
+      "price": "160",
+      "background": "../assets/Memory/Kingston-FURY-Beast-64GB.png",
+      "id": "14"
+    },
+    {
+      "title": "Corsair Vengeance RGB Pro 64GB (4x16GB) DDR4 3200 (PC4-25600) C16",
+      "description": "High performance DDR4 memory illuminates your system with vivid, animated lighting from ten ultra-bright, individually addressable RGB LEDs per module.",
+      "category": "ram",
+      "price": "220",
+      "background": "../assets/Memory/Corsair-Vengeance-RGB-Pro-64GB-(4x16GB)-DDR4.png",
+      "id": "15"
+    },
+    {
+      "title": "ASUS Prime B450M-A II AMD AM4",
+      "description": "AMD AM4 Socket : Compatible to Ryzen 5000, 3rd/2nd/1st Gen AMD",
+      "category": "motherboard",
+      "price": "90",
+      "background": "../assets/Motherboards/ASUS-Prime-B450M-A-II-AMD-AM4.png",
+      "id": "16"
+    },
+    {
+      "title": "MSI B450 GAMING PLUS Max",
+      "description": "Supports 1st, 2nd and 3rd Gen AMD Ryzen/ Ryzen with Radeon Vega Graphics and 2nd Gen AMD Ryzen with Radeon graphics/ Athlon with Radeon Vega Graphics desktop processors for socket AM4.",
+      "category": "motherboard",
+      "price": "100",
+      "background": "../assets/Motherboards/MSI-B450-GAMING-PLUS-Max.png",
+      "id": "17"
+    },
+    {
+      "title": "ASUS AM4 TUF Gaming X570-Plus (Wi-Fi)",
+      "description": "AMD AM4 socket: Ready for 2nd and 3rd Gen AMD Ryzen processors to maximize connectivity and speed with up to two M.2 Drives, USB 3.2 Gen2 and AMD StoreMI.",
+      "category": "motherboard",
+      "price": "129",
+      "background": "../assets/Motherboards/ASUS-AM4-TUF-Gaming-X570-Plus-(Wi-Fi).png",
+      "id": "18"
+    },
+    {
+      "title": "ASUS ROG Strix B550-F Gaming",
+      "description": "AMD AM4 Socket and PCIe 4.0: The perfect pairing for Zen 3 Ryzen 5000 & 3rd Gen AMD Ryzen.",
+      "category": "motherboard",
+      "price": "130",
+      "background": "../assets/Motherboards/ASUS-ROG-Strix-B550-F-Gaming.png",
+      "id": "19"
+    },
+    {
+      "title": "MSI B550-A PRO ProSeries",
+      "description": "Support for 3rd Gen AMD Ryzen processors and future AMD Ryzen processors with BIOS update.",
+      "category": "motherboard",
+      "price": "140",
+      "background": "../assets/Motherboards/MSI-B550-A-PRO-ProSeries.png",
+      "id": "20"
+    },
+    {
+      "title": "Thermaltake Versa H21 SPCC ATX Mid Tower Computer Chassis",
+      "description": "Designed for gamer, perforated metal mesh front and top panel to allow quick heat dissipation and rapid air intake for maximum ventilation. The heighten foot-stands at the bottom help to enhance airflow.",
+      "category": "case",
+      "price": "60",
+      "background": "../assets/Cases/Thermaltake-Versa-H21-SPCC-ATX-Mid-Tower-Computer-Chassis.png",
+      "id": "21"
+    },
+    {
+      "title": "Thermaltake V250 Motherboard Sync ARGB ATX Mid-Tower Chassis",
+      "description": "The V250 Tempered Glass ARGB Mid Tower Chassis is the newest member of Thermaltake V Series chassis. Its three preinstalled 120mm 5V ARGB front fans can be controlled via the motherboard synchronization software or the RGB switch on the top of the I/O port.",
+      "category": "case",
+      "price": "70",
+      "background": "../assets/Cases/Thermaltake-V250-chasis.jpg",
+      "id": "22"
+    },
+    {
+      "title": "Corsair 4000D Airflow Tempered Glass Mid-Tower ATX PC Case - Black",
+      "description": "Combining innovative cable management, concentrated airflow, and proven CORSAIR build quality, the 4000D is a fitting choice for an immaculate high-performance PC.",
+      "category": "case",
+      "price": "105",
+      "background": "../assets/Cases/Corsair-4000D-Airflow-Tempered-Glass-Mid-Tower.png",
+      "id": "23"
+    },
+    {
+      "title": "ASUS TUF Gaming GT501 ZENITSU Mid-Tower Computer Case",
+      "description": "Mid-Tower with support for EATX Motherboards featuring a metal chassis and panels with custom TUF Gaming spatter pattern and 4mm-thick smoked, tempered-glass full view side panel.",
+      "category": "case",
+      "price": "170",
+      "background": "../assets/Cases/ASUS-TUF-Gaming-GT501.jpg",
+      "id": "24"
+    },
+    {
+      "title": "Lian-Li O11 Dynamic EVO ATX Mid Tower Tempered Glass Computer Case",
+      "description": "Dynamic EVO Aluminum, Steel & Tempered Glass ATX Mid Tower Computer Case.",
+      "category": "case",
+      "price": "180",
+      "background": "../assets/Cases/Lian-Li-O11-Dynamic.jpg",
+      "id": "25"
+    }
+  ]
+}

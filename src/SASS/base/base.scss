@@ -1,0 +1,52 @@
+:root {
+  --mainColor: #0055a3;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul,
+button,
+a {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.main-button {
+  color: white;
+  background-color: var(--mainColor);
+  font-size: 1.25rem;
+  padding: 12px 52px;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0px 1px 13px rgba(10, 157, 220, 0.39);
+}
