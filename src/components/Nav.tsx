@@ -1,4 +1,8 @@
 import { useRef, useState } from "react";
+import { NavLink } from "react-router-dom";
+
+import type { shoppingCartItems } from "./ShoppingCart/useShoppingCartItems";
+
 import { playAnimation } from "../utils/playAnimation";
 
 import logo from "../assets/logo-icon-coloured.png";
@@ -8,11 +12,23 @@ import closedBurgerMenu from "../assets/close.svg";
 import homeIcon from "../assets/home.svg";
 import catalogueIcon from "../assets/small-shop.svg";
 
-export const Nav = () => {
+export const Nav = ({
+  shoppingCartItems,
+}: {
+  shoppingCartItems: shoppingCartItems;
+}) => {
   const [navigationDropdownIsOpen, setNavigationDropdownIsOpen] =
     useState(false);
-
   const navigationDropdown = useRef<HTMLUListElement>(null);
+
+  function getShoppingCartItemsQuantity() {
+    if (shoppingCartItems.length === 0) return 0;
+    return shoppingCartItems.reduce(
+      (quantity, item) => quantity + item.quantity,
+      0
+    );
+  }
+  const shoppingCartItemsQuantity = getShoppingCartItemsQuantity();
 
   function toggleNavigationDropdown() {
     const navigationDropdownStatus = !navigationDropdownIsOpen;
@@ -37,21 +53,21 @@ export const Nav = () => {
         ref={navigationDropdown}
       >
         <li>
-          <button className="nav-link" role="link" data-active="true">
+          <NavLink className="nav-link" to="./">
             <span className="nav-link-icon">
               <img src={homeIcon} alt="" />
             </span>
             Home
-          </button>
+          </NavLink>
         </li>
 
         <li>
-          <button className="nav-link" role="link">
+          <NavLink className="nav-link" to="./catalogue">
             <span className="nav-link-icon">
               <img src={catalogueIcon} alt="" />
             </span>
             Catalogue
-          </button>
+          </NavLink>
         </li>
       </ul>
 
@@ -66,7 +82,9 @@ export const Nav = () => {
           <span
             className="shopping-cart-items-count"
             aria-label="Number of added items"
-          ></span>
+          >
+            {shoppingCartItemsQuantity}
+          </span>
         </button>
 
         <button
