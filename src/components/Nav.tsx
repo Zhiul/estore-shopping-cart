@@ -1,29 +1,30 @@
-import { useRef, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useRef, useState, useContext } from "react";
 
-import type { shoppingCartItems } from "./ShoppingCart/useShoppingCartItems";
+import { ShoppingCartItemsContext } from "../App";
+import { NavLink } from "react-router-dom";
 
 import { playAnimation } from "../utils/playAnimation";
 
 import logo from "../assets/logo-icon-coloured.png";
 import { ReactComponent as ShoppingCartIcon } from "../assets/shopping-cart-open-cta-icon.svg";
 import openBurgerMenu from "../assets/hamburger_icon.svg";
-import closedBurgerMenu from "../assets/close.svg";
+import { ReactComponent as CloseIcon } from "../assets/close.svg";
 import homeIcon from "../assets/home.svg";
 import catalogueIcon from "../assets/small-shop.svg";
 
-export const Nav = ({
-  shoppingCartItems,
-}: {
-  shoppingCartItems: shoppingCartItems;
-}) => {
+interface NavProps {
+  toggleShoppingCartIsOpen: () => void;
+}
+
+export const Nav = ({ toggleShoppingCartIsOpen }: NavProps) => {
+  const shoppingCartItems = useContext(ShoppingCartItemsContext);
   const [navigationDropdownIsOpen, setNavigationDropdownIsOpen] =
     useState(false);
   const navigationDropdown = useRef<HTMLUListElement>(null);
 
   function getShoppingCartItemsQuantity() {
-    if (shoppingCartItems.length === 0) return 0;
-    return shoppingCartItems.reduce(
+    if (shoppingCartItems.items.length === 0) return 0;
+    return shoppingCartItems.items.reduce(
       (quantity, item) => quantity + item.quantity,
       0
     );
@@ -75,10 +76,9 @@ export const Nav = ({
         <button
           className="nav-button shopping-cart-button"
           aria-label="Open shopping Cart"
+          onClick={toggleShoppingCartIsOpen}
         >
-          <span className="shopping-cart-button-icon">
-            <ShoppingCartIcon></ShoppingCartIcon>
-          </span>
+          <ShoppingCartIcon aria-hidden="true"></ShoppingCartIcon>
           <span
             className="shopping-cart-items-count"
             aria-label="Number of added items"
@@ -98,11 +98,7 @@ export const Nav = ({
               src={openBurgerMenu}
               alt=""
             />
-            <img
-              className="burger-menu-close-icon"
-              src={closedBurgerMenu}
-              alt=""
-            />
+            <CloseIcon className="burger-menu-close-icon" />
           </span>
         </button>
       </div>

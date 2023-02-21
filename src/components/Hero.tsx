@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import HeroImage from "../assets/hero-img.png";
 
 export const Hero = () => {
@@ -15,9 +16,9 @@ export const Hero = () => {
           a wide range of high-quality components, including processors,
           graphics cards, motherboards, RAM and cases.
         </p>
-        <button className="main-button" type="button">
+        <Link className="main-button" to="./catalogue">
           Buy now
-        </button>
+        </Link>
       </div>
     </div>
   );
