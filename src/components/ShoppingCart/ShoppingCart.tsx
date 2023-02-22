@@ -1,21 +1,14 @@
-import { useLockedBody } from "usehooks-ts";
-
 import { useContext } from "react";
 import { ShoppingCartItemsContext } from "../../App";
 import shoppingCartIcon from "../../assets/shopping-cart.svg";
 import { ReactComponent as CloseIcon } from "../../assets/close.svg";
 
 interface ShoppingCartProps {
-  shoppingCartIsOpen: boolean;
-  toggleShoppingCartIsOpen: () => void;
+  isActive: boolean;
+  setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export function ShoppingCart({
-  shoppingCartIsOpen,
-  toggleShoppingCartIsOpen,
-}: ShoppingCartProps) {
-  useLockedBody(shoppingCartIsOpen);
-
+export function ShoppingCart({ isActive, setActive }: ShoppingCartProps) {
   const shoppingCartItems = useContext(ShoppingCartItemsContext);
 
   function changeItemQuantity(id: string, quantity: number) {
@@ -27,10 +20,7 @@ export function ShoppingCart({
   }
 
   return (
-    <div
-      className="shopping-cart"
-      data-open={shoppingCartIsOpen ? "true" : "false"}
-    >
+    <div className="shopping-cart" data-open={isActive ? "true" : "false"}>
       <header className="shopping-cart-header">
         <div className="shopping-cart-header-title">
           <img src={shoppingCartIcon} alt="" />
@@ -39,7 +29,9 @@ export function ShoppingCart({
 
         <button
           className="shopping-cart-close"
-          onClick={toggleShoppingCartIsOpen}
+          onClick={() => {
+            setActive(false);
+          }}
         >
           <CloseIcon aria-hidden="true"></CloseIcon>
         </button>

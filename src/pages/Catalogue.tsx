@@ -59,13 +59,13 @@ export const CataloguePage = () => {
   }
 
   return (
-    <>
+    <div className="wrapper">
       <CatalogueFiltersList
         shopCategoryFilters={shopCategoryFilters}
         toggleCategoryFiltersList={toggleCategoryFiltersList}
       />
 
       <CatalogueList shopCategoryFilters={shopCategoryFilters} />
-    </>
+    </div>
   );
 };

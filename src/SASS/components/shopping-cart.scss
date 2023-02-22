@@ -7,6 +7,7 @@
   position: fixed;
   inset: 0px 0px 0px 0px;
   background-color: #ebe9e9;
+  z-index: 1000;
 
   &[data-open="true"] {
     opacity: 1;

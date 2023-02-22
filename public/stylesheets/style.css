@@ -52,6 +52,12 @@ img {
   height: auto;
 }
 
+.wrapper {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
 .main-button {
   display: inline-block;
   cursor: pointer;
@@ -70,6 +76,22 @@ img {
   box-shadow: 0px 1px 13px 5px rgba(10, 157, 220, 0.39);
 }
 
+.overlay {
+  position: fixed;
+  inset: 0px 0px 0px 0px;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.overlay.overlay-transparent {
+  background-color: transparent;
+}
+.overlay[data-active=true] {
+  pointer-events: all;
+  opacity: 1;
+}
+
 .sr-only {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
@@ -86,11 +108,20 @@ img {
   }
 }
 nav {
+  display: flex;
+  box-shadow: 0px 2px 4px hsla(0deg, 0%, 0%, 0.25);
+  justify-content: center;
+  top: 0;
+  position: sticky;
+  background: white;
+  z-index: 1;
+}
+
+nav .wrapper {
   padding: 20px;
   display: flex;
   justify-content: space-between;
   position: relative;
-  box-shadow: 0px 2px 4px hsla(0deg, 0%, 0%, 0.25);
 }
 
 h1 {
@@ -120,17 +151,18 @@ h1 {
 }
 @media only screen and (max-width: 768px) {
   .nav-links {
+    width: 170px;
     padding: 13px 6px 45px 6px;
     flex-direction: column;
     gap: 8px;
-    position: absolute;
+    position: fixed;
     top: 68px;
     right: 20px;
-    width: 170px;
     background-color: var(--mainColor);
     box-shadow: -5px 1px 6px 0px #0474db;
     opacity: 0;
     border-radius: 9px;
+    z-index: 1000;
   }
   .nav-links[data-animation=opening] {
     animation: toggleNavLinksVisibility 200ms ease-in-out;
@@ -283,6 +315,7 @@ h1 {
   position: fixed;
   inset: 0px 0px 0px 0px;
   background-color: #ebe9e9;
+  z-index: 1000;
 }
 .shopping-cart[data-open=true] {
   opacity: 1;

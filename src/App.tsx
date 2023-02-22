@@ -1,9 +1,10 @@
+import type { shoppingCartItems } from "./components/ShoppingCart/useShoppingCartItems";
+
 import { useState, createContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import type { shoppingCartItems } from "./components/ShoppingCart/useShoppingCartItems";
-
-import { Nav } from "./components/Nav";
+import { CreateModal } from "./utils/createModal";
+import { Nav } from "./components/Nav/Nav";
 import { Home } from "./pages/Home";
 import { CataloguePage } from "./pages/Catalogue";
 import { ShoppingCart } from "./components/ShoppingCart/ShoppingCart";
@@ -16,6 +17,15 @@ function App() {
   const shoppingCartItems = useShoppingCartItems();
   const [shoppingCartIsOpen, setShoppingCartIsOpen] = useState(false);
 
+  const ShoppingCartModal = CreateModal(
+    ShoppingCart,
+    {},
+    true,
+    shoppingCartIsOpen,
+    setShoppingCartIsOpen,
+    "overlay"
+  );
+
   function toggleShoppingCartIsOpen() {
     const newShoppingCartIsOpen = !shoppingCartIsOpen;
     setShoppingCartIsOpen(newShoppingCartIsOpen);
@@ -26,11 +36,7 @@ function App() {
       <BrowserRouter>
         <ShoppingCartItemsContext.Provider value={shoppingCartItems}>
           <Nav toggleShoppingCartIsOpen={toggleShoppingCartIsOpen} />
-
-          <ShoppingCart
-            shoppingCartIsOpen={shoppingCartIsOpen}
-            toggleShoppingCartIsOpen={toggleShoppingCartIsOpen}
-          />
+          {ShoppingCartModal}
         </ShoppingCartItemsContext.Provider>
 
         <Routes>
