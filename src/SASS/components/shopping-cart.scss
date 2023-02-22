@@ -1,4 +1,6 @@
-@keyframes shoppingCartAppearing {
+@use "../base/mixins.scss" as *;
+
+@keyframes shoppingCartModalAppearing {
   from {
     opacity: 0.6;
     transform: scale(0.9);
@@ -7,6 +9,16 @@
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@keyframes shoppingCartSidebarAppearing {
+  from {
+    transform: translateX(350px);
+  }
+
+  to {
+    transform: translateX(0px);
   }
 }
 
@@ -28,11 +40,34 @@
   }
 
   &[data-animation="opening"] {
-    animation: shoppingCartAppearing 200ms ease-in-out;
+    animation: shoppingCartModalAppearing 200ms ease-in-out;
   }
 
   &[data-animation="closing"] {
-    animation: shoppingCartAppearing 200ms ease-in-out reverse;
+    animation: shoppingCartModalAppearing 200ms ease-in-out reverse;
+  }
+
+  @include lg-breakpoint {
+    width: 350px;
+    height: 100%;
+    border-radius: 0px;
+    inset: unset;
+    top: 0px;
+    right: 0px;
+    transform: translateX(350px);
+    opacity: 1;
+
+    &[data-open="true"] {
+      transform: translateX(0px);
+    }
+
+    &[data-animation="opening"] {
+      animation: shoppingCartSidebarAppearing 200ms ease-in-out;
+    }
+
+    &[data-animation="closing"] {
+      animation: shoppingCartSidebarAppearing 200ms ease-in-out reverse;
+    }
   }
 }
 

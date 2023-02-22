@@ -306,7 +306,7 @@ h1 {
   width: 42px;
 }
 
-@keyframes shoppingCartAppearing {
+@keyframes shoppingCartModalAppearing {
   from {
     opacity: 0.6;
     transform: scale(0.9);
@@ -314,6 +314,14 @@ h1 {
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+@keyframes shoppingCartSidebarAppearing {
+  from {
+    transform: translateX(350px);
+  }
+  to {
+    transform: translateX(0px);
   }
 }
 .shopping-cart {
@@ -333,10 +341,31 @@ h1 {
   pointer-events: all;
 }
 .shopping-cart[data-animation=opening] {
-  animation: shoppingCartAppearing 200ms ease-in-out;
+  animation: shoppingCartModalAppearing 200ms ease-in-out;
 }
 .shopping-cart[data-animation=closing] {
-  animation: shoppingCartAppearing 200ms ease-in-out reverse;
+  animation: shoppingCartModalAppearing 200ms ease-in-out reverse;
+}
+@media only screen and (min-width: 768px) {
+  .shopping-cart {
+    width: 350px;
+    height: 100%;
+    border-radius: 0px;
+    inset: unset;
+    top: 0px;
+    right: 0px;
+    transform: translateX(350px);
+    opacity: 1;
+  }
+  .shopping-cart[data-open=true] {
+    transform: translateX(0px);
+  }
+  .shopping-cart[data-animation=opening] {
+    animation: shoppingCartSidebarAppearing 200ms ease-in-out;
+  }
+  .shopping-cart[data-animation=closing] {
+    animation: shoppingCartSidebarAppearing 200ms ease-in-out reverse;
+  }
 }
 
 .shopping-cart-header {
