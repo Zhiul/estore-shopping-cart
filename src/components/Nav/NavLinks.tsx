@@ -1,7 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { NavLink } from "react-router-dom";
 
-import { playAnimation } from "../../utils/playAnimation";
+import { useModalAnimation } from "../../utils/useModalAnimation";
 
 import homeIcon from "../../assets/home.svg";
 import catalogueIcon from "../../assets/small-shop.svg";
@@ -12,18 +12,14 @@ interface NavLinksProps {
 }
 
 export const NavLinks = ({ isActive, setActive }: NavLinksProps) => {
-  const navigationDropdown = useRef<HTMLUListElement>(null);
-
-  useEffect(() => {
-    const navigationDropdownAnimation = isActive ? "opening" : "closing";
-    playAnimation(navigationDropdown, navigationDropdownAnimation);
-  }, [isActive]);
+  const element = useRef(null);
+  useModalAnimation(element, isActive);
 
   return (
     <ul
       className="nav-links"
       data-visible={isActive ? "true" : "false"}
-      ref={navigationDropdown}
+      ref={element}
     >
       <li>
         <NavLink className="nav-link" to="./">

@@ -41,6 +41,10 @@
   margin-bottom: 15px;
   flex: 1.2;
 
+  img {
+    display: block;
+  }
+
   @include lg-breakpoint {
     max-width: unset;
     width: clamp(0px, 80vw, 650px);

@@ -1,5 +1,7 @@
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { ShoppingCartItemsContext } from "../../App";
+import { useModalAnimation } from "../../utils/useModalAnimation";
+
 import shoppingCartIcon from "../../assets/shopping-cart.svg";
 import { ReactComponent as CloseIcon } from "../../assets/close.svg";
 
@@ -10,6 +12,8 @@ interface ShoppingCartProps {
 
 export function ShoppingCart({ isActive, setActive }: ShoppingCartProps) {
   const shoppingCartItems = useContext(ShoppingCartItemsContext);
+  const element = useRef(null);
+  useModalAnimation(element, isActive);
 
   function changeItemQuantity(id: string, quantity: number) {
     shoppingCartItems.dispatch({
@@ -20,7 +24,11 @@ export function ShoppingCart({ isActive, setActive }: ShoppingCartProps) {
   }
 
   return (
-    <div className="shopping-cart" data-open={isActive ? "true" : "false"}>
+    <div
+      className="shopping-cart"
+      data-open={isActive ? "true" : "false"}
+      ref={element}
+    >
       <header className="shopping-cart-header">
         <div className="shopping-cart-header-title">
           <img src={shoppingCartIcon} alt="" />

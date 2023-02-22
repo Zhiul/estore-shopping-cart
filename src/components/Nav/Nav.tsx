@@ -24,7 +24,9 @@ export const Nav = ({ toggleShoppingCartIsOpen }: NavProps) => {
     false,
     navigationDropdownIsOpen,
     setNavigationDropdownIsOpen,
-    "overlay overlay-transparent"
+    "overlay overlay-transparent",
+    200,
+    768
   );
 
   function getShoppingCartItemsQuantity() {

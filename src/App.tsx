@@ -20,7 +20,7 @@ function App() {
   const ShoppingCartModal = CreateModal(
     ShoppingCart,
     {},
-    true,
+    false,
     shoppingCartIsOpen,
     setShoppingCartIsOpen,
     "overlay"
