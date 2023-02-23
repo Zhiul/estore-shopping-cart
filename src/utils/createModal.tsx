@@ -36,7 +36,7 @@ export function CreateModal<T>(
     <>
       {isPortal ? (
         isActive ||
-        (animationIsRunning &&
+        (animationIsRunning === false &&
           createPortal(
             <>
               <div
