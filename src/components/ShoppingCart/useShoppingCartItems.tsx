@@ -27,13 +27,25 @@ interface shoppingCartChangeItemQuantity {
   quantity: number;
 }
 
+interface shoppingCartIncreaseItemQuantity {
+  type: "increase quantity";
+  id: string;
+}
+
+interface shoppingCartDecreaseItemQuantity {
+  type: "decrease quantity";
+  id: string;
+}
+
 interface shoppingCartRemoveAllItems {
   type: "remove all";
 }
 
 type shoppingCartAction =
   | shoppingCartChangeItemQuantity
-  | shoppingCartRemoveAllItems;
+  | shoppingCartRemoveAllItems
+  | shoppingCartIncreaseItemQuantity
+  | shoppingCartDecreaseItemQuantity;
 
 class ShoppingCartItem {
   title: string;
@@ -64,25 +76,52 @@ function shoppingCartItemsReducer(
   action: shoppingCartAction
 ): shoppingCartItemsCollection {
   function createShoppingCartItem(id: string) {
-    return new ShoppingCartItem(ShopItems.items[parseInt(id)], 1);
+    const item = ShopItems.items.find((item) => item.id === id);
+    if (item) return new ShoppingCartItem(item, 1);
+    return new Error("Item has not been found");
+  }
+
+  function changeItemQuantity(
+    type: "change" | "increase" | "decrease",
+    id: string,
+    quantity: number = 0
+  ) {
+    const newState = [...state];
+
+    const itemIndex = newState.findIndex((item) => item.id === id);
+
+    if (itemIndex > -1) {
+      const item = newState[itemIndex];
+
+      if (type === "change") {
+        item.setQuantity(quantity);
+        if (quantity === 0) return newState.splice(itemIndex, 1);
+      } else if (type === "increase") {
+        item.setQuantity(item.quantity + 1);
+      } else if (type === "decrease") {
+        item.setQuantity(item.quantity - 1);
+        if (item.quantity === 0) return newState.splice(itemIndex, 1);
+      }
+
+      return newState;
+    } else {
+      const item = createShoppingCartItem(id);
+      if (item instanceof Error) return state;
+      return [...newState, item];
+    }
   }
 
   switch (action.type) {
+    case "increase quantity": {
+      return changeItemQuantity("increase", action.id);
+    }
+
+    case "decrease quantity": {
+      return changeItemQuantity("decrease", action.id);
+    }
+
     case "change quantity": {
-      const newState = [...state];
-
-      let itemIndex = newState.findIndex((item) => item.id === action.id);
-
-      if (itemIndex > -1) {
-        const item = newState[itemIndex];
-        if (action.quantity === 0) return newState.splice(itemIndex, 1);
-
-        item.setQuantity(action.quantity);
-
-        return newState;
-      } else {
-        return [...state, createShoppingCartItem(action.id)];
-      }
+      return changeItemQuantity("change", action.id, action.quantity);
     }
 
     case "remove all": {
@@ -96,13 +135,7 @@ function shoppingCartItemsReducer(
   }
 }
 
-export function useShoppingCartItems() {
-  // @ts-expect-error
-
-  const [shoppingCartItems, dispatch] = useReducer<
-    shoppingCartItemsCollection,
-    shoppingCartAction
-  >(shoppingCartItemsReducer, []);
-
-  return { items: shoppingCartItems, dispatch };
+export function useShoppingCartItems(): shoppingCartItems {
+  const [items, dispatch] = useReducer(shoppingCartItemsReducer, []);
+  return { items, dispatch };
 }

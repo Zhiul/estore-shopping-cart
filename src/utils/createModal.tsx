@@ -1,4 +1,4 @@
-import { ComponentType, useEffect, useState, useRef } from "react";
+import { ComponentType, useLayoutEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
 import { useLockedBody } from "usehooks-ts";
 import { useWindowResolution } from "./useWindowResolution";
@@ -7,17 +7,42 @@ import { isNumber } from "lodash";
 export function CreateModal<T>(
   Component: ComponentType<T>,
   ComponentProps: Omit<T, "isActive" | "setActive">,
-  isPortal: boolean,
   isActive: boolean,
   setActive: React.Dispatch<React.SetStateAction<boolean>>,
   overlayClassName: string,
-  animationDuration?: number,
+  animationDuration: number = 0,
+  isPortal: boolean = false,
   maxWidth: number | "unset" = "unset"
 ) {
+  const modal = (
+    <>
+      <div
+        className={overlayClassName}
+        data-active={isActive}
+        onClick={(e) => {
+          e.stopPropagation();
+          setActive(false);
+        }}
+      ></div>
+
+      <Component
+        isActive={isActive}
+        setActive={setActive}
+        {...(ComponentProps as T)}
+      />
+    </>
+  );
+
+  const isMounted = useRef(false);
   const [animationIsRunning, setAnimationIsRunning] = useState(false);
   const windowResolution = useWindowResolution();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    if (isMounted.current === false) {
+      isMounted.current = true;
+      return;
+    }
+
     if (isActive === false && animationDuration) {
       setAnimationIsRunning(true);
 
@@ -34,38 +59,9 @@ export function CreateModal<T>(
 
   return (
     <>
-      {isPortal ? (
-        isActive ||
-        (animationIsRunning === false &&
-          createPortal(
-            <>
-              <div
-                className={overlayClassName}
-                data-active={isActive}
-                onClick={() => setActive(false)}
-              ></div>
-              <Component
-                isActive={isActive}
-                setActive={setActive}
-                {...(ComponentProps as T)}
-              />
-            </>,
-            document.body
-          ))
-      ) : (
-        <>
-          <div
-            className={overlayClassName}
-            data-active={isActive}
-            onClick={() => setActive(false)}
-          ></div>
-          <Component
-            isActive={isActive}
-            setActive={setActive}
-            {...(ComponentProps as T)}
-          />
-        </>
-      )}
+      {isPortal
+        ? (isActive || animationIsRunning) && createPortal(modal, document.body)
+        : modal}
     </>
   );
 }

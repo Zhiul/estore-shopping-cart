@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { debounce } from "lodash";
 
 class WindowDimensions {
@@ -11,25 +11,36 @@ class WindowDimensions {
   }
 }
 
-export const useWindowResolution = () => {
-  const [resolution, setResolution] = useState(
-    new WindowDimensions(window.innerWidth, window.innerHeight)
+let windowResolution = new WindowDimensions(
+  window.innerWidth,
+  window.innerHeight
+);
+
+const setWindowResolution = debounce(() => {
+  const debouncedResize = new CustomEvent("debouncedresize");
+
+  windowResolution = new WindowDimensions(
+    window.innerWidth,
+    window.innerHeight
   );
 
-  useEffect(() => {
-    const setWindowResolution = debounce(() => {
-      console.log(window.innerWidth);
-      setResolution(
-        new WindowDimensions(window.innerWidth, window.innerHeight)
-      );
-    }, 1000);
+  window.dispatchEvent(debouncedResize);
+}, 1000);
 
-    window.addEventListener("resize", setWindowResolution);
+window.addEventListener("resize", setWindowResolution);
 
-    return () => {
-      window.removeEventListener("resize", setWindowResolution);
-    };
-  }, []);
+function subscribe(callback: () => void) {
+  window.addEventListener("debouncedresize", callback);
+  return () => {
+    window.removeEventListener("debouncedresize", callback);
+  };
+}
 
-  return resolution;
+function getSnapshot() {
+  return windowResolution;
+}
+
+export const useWindowResolution = () => {
+  const WindowDimensions = useSyncExternalStore(subscribe, getSnapshot);
+  return WindowDimensions;
 };

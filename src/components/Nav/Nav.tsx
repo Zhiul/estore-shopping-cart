@@ -21,16 +21,17 @@ export const Nav = ({ toggleShoppingCartIsOpen }: NavProps) => {
   const NavLinksModal = CreateModal(
     NavLinks,
     {},
-    false,
     navigationDropdownIsOpen,
     setNavigationDropdownIsOpen,
     "overlay overlay-transparent",
     200,
+    false,
     768
   );
 
   function getShoppingCartItemsQuantity() {
     if (shoppingCartItems.items.length === 0) return 0;
+    console.log(shoppingCartItems);
     return shoppingCartItems.items.reduce(
       (quantity, item) => quantity + item.quantity,
       0

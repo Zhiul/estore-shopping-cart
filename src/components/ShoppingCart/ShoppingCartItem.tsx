@@ -1,20 +1,14 @@
-import { shoppingCartItem } from "./ShoppingCartTypes";
+import { shoppingCartItem } from "./useShoppingCartItems";
 
 interface ShoppingCartProps {
-  shoppingCartItem: shoppingCartItem;
-  changeItemQuantity: (id: string, quantity: string) => void;
+  item: shoppingCartItem;
 }
 
-export function ShoppingCartItem({
-  shoppingCartItem,
-  changeItemQuantity,
-}: ShoppingCartProps) {
-  const totalPrice =
-    parseInt(shoppingCartItem.price) * shoppingCartItem.quantity;
+export function ShoppingCartItem({ item }: ShoppingCartProps) {
+  const totalPrice = parseInt(item.price) * item.quantity;
 
   function handleQuantityInput(e: React.ChangeEvent<HTMLInputElement>) {
     const quantity = e.target.value;
-    changeItemQuantity(shoppingCartItem.id, quantity);
   }
 
   return (
@@ -22,10 +16,10 @@ export function ShoppingCartItem({
       <div className="shopping-cart-item-img"></div>
 
       <div className="shopping-cart-item-container">
-        <h4>{shoppingCartItem.title}</h4>
+        <h4>{item.title}</h4>
 
         <input
-          value={shoppingCartItem.quantity}
+          value={item.quantity}
           type="number"
           className="shopping-cart-quantity"
           onChange={(e) => {

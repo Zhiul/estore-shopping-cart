@@ -14,10 +14,11 @@ export const CatalogueListItem = ({ item }: catalogueListItemProps) => {
   const Modal = CreateModal(
     CatalogueListItemModal,
     { item },
-    true,
     modalIsActive,
     setModalIsActive,
-    "overlay"
+    "overlay",
+    200,
+    true
   );
 
   return (
@@ -31,7 +32,7 @@ export const CatalogueListItem = ({ item }: catalogueListItemProps) => {
         <img src={item.image} alt="" />
       </div>
 
-      <h3>{item.title}</h3>
+      <h3 className="catalogue-item-title">{item.title}</h3>
       <div className="catalogue-list-item-price">${item.price}</div>
       {Modal}
     </div>

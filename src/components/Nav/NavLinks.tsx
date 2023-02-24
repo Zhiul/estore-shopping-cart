@@ -16,11 +16,7 @@ export const NavLinks = ({ isActive, setActive }: NavLinksProps) => {
   useModalAnimation(element, isActive);
 
   return (
-    <ul
-      className="nav-links"
-      data-visible={isActive ? "true" : "false"}
-      ref={element}
-    >
+    <ul className="nav-links" data-visible={isActive} ref={element}>
       <li>
         <NavLink className="nav-link" to="./">
           <span className="nav-link-icon">

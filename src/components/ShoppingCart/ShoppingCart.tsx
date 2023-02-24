@@ -1,4 +1,7 @@
 import { useContext, useRef } from "react";
+
+import { ShoppingCartItem } from "./ShoppingCartItem";
+
 import { ShoppingCartItemsContext } from "../../App";
 import { useModalAnimation } from "../../utils/useModalAnimation";
 
@@ -15,13 +18,21 @@ export function ShoppingCart({ isActive, setActive }: ShoppingCartProps) {
   const element = useRef(null);
   useModalAnimation(element, isActive);
 
-  function changeItemQuantity(id: string, quantity: number) {
+  function removeAllItems() {
     shoppingCartItems.dispatch({
-      type: "change quantity",
-      id,
-      quantity,
+      type: "remove all",
     });
   }
+
+  function getTotalPrice() {
+    return shoppingCartItems.items.reduce(
+      (prevTotal, currentItem) =>
+        prevTotal + parseInt(currentItem.price) * currentItem.quantity,
+      0
+    );
+  }
+
+  const totalPrice = getTotalPrice();
 
   return (
     <div
@@ -49,15 +60,30 @@ export function ShoppingCart({ isActive, setActive }: ShoppingCartProps) {
 
       <div className="shopping-cart-wrapper">
         <div className="shopping-cart-items">
-          <button className="shopping-cart-header-remove-all">
+          <button
+            className="shopping-cart-header-remove-all"
+            onClick={removeAllItems}
+          >
             Remove all items
           </button>
+
+          <ul>
+            {shoppingCartItems.items.map((item) => {
+              return (
+                <li key={item.id}>
+                  <ShoppingCartItem item={item} />
+                </li>
+              );
+            })}
+          </ul>
         </div>
 
         <div className="shopping-cart-separator"> </div>
 
         <div className="shopping-cart-checkout">
-          <div className="shopping-cart-checkout-total">Total: $</div>
+          <div className="shopping-cart-checkout-total">
+            Total: {totalPrice}$
+          </div>
           <button className="main-button">Checkout</button>
         </div>
       </div>

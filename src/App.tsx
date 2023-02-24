@@ -20,7 +20,6 @@ function App() {
   const ShoppingCartModal = CreateModal(
     ShoppingCart,
     {},
-    false,
     shoppingCartIsOpen,
     setShoppingCartIsOpen,
     "overlay"
@@ -33,17 +32,17 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
-        <ShoppingCartItemsContext.Provider value={shoppingCartItems}>
+      <ShoppingCartItemsContext.Provider value={shoppingCartItems}>
+        <BrowserRouter>
           <Nav toggleShoppingCartIsOpen={toggleShoppingCartIsOpen} />
           {ShoppingCartModal}
-        </ShoppingCartItemsContext.Provider>
 
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/catalogue" element={<CataloguePage />}></Route>
-        </Routes>
-      </BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/catalogue" element={<CataloguePage />}></Route>
+          </Routes>
+        </BrowserRouter>
+      </ShoppingCartItemsContext.Provider>
     </>
   );
 }

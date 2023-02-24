@@ -3,12 +3,13 @@ import { playAnimation } from "./playAnimation";
 
 export const useModalAnimation = (
   element: React.RefObject<HTMLElement>,
-  isActive: boolean
+  isActive: boolean,
+  isPortal = false
 ) => {
   const isMounted = useRef(false);
 
   useEffect(() => {
-    if (isMounted.current === false) {
+    if (!isPortal && isMounted.current === false) {
       isMounted.current = true;
       return;
     }
