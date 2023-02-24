@@ -37,12 +37,18 @@ interface shoppingCartDecreaseItemQuantity {
   id: string;
 }
 
+interface shoppingCartRemoveItem {
+  type: "remove item";
+  id: string;
+}
+
 interface shoppingCartRemoveAllItems {
   type: "remove all";
 }
 
 type shoppingCartAction =
   | shoppingCartChangeItemQuantity
+  | shoppingCartRemoveItem
   | shoppingCartRemoveAllItems
   | shoppingCartIncreaseItemQuantity
   | shoppingCartDecreaseItemQuantity;
@@ -81,6 +87,13 @@ function shoppingCartItemsReducer(
     return new Error("Item has not been found");
   }
 
+  function removeItem(id: string) {
+    const newState = [...state];
+    const itemIndex = newState.findIndex((item) => item.id === id);
+    newState.splice(itemIndex, 1);
+    return newState;
+  }
+
   function changeItemQuantity(
     type: "change" | "increase" | "decrease",
     id: string,
@@ -95,12 +108,18 @@ function shoppingCartItemsReducer(
 
       if (type === "change") {
         item.setQuantity(quantity);
-        if (quantity === 0) return newState.splice(itemIndex, 1);
+        if (quantity <= 0) {
+          newState.splice(itemIndex, 1);
+        }
+        return newState;
       } else if (type === "increase") {
         item.setQuantity(item.quantity + 1);
       } else if (type === "decrease") {
         item.setQuantity(item.quantity - 1);
-        if (item.quantity === 0) return newState.splice(itemIndex, 1);
+        if (item.quantity <= 0) {
+          newState.splice(itemIndex, 1);
+        }
+        return newState;
       }
 
       return newState;
@@ -122,6 +141,10 @@ function shoppingCartItemsReducer(
 
     case "change quantity": {
       return changeItemQuantity("change", action.id, action.quantity);
+    }
+
+    case "remove item": {
+      return removeItem(action.id);
     }
 
     case "remove all": {

@@ -20,7 +20,9 @@ export const CatalogueListItemModal = ({
 
   useModalAnimation(element, isActive, true);
 
-  function addItemToCart() {
+  function addItemToCart(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e.stopPropagation();
+
     shoppingCartItems.dispatch({ type: "increase quantity", id: item.id });
     setActive(false);
   }
@@ -42,7 +44,12 @@ export const CatalogueListItemModal = ({
           {item.description}
         </p>
 
-        <button className="main-button" onClick={addItemToCart}>
+        <button
+          className="main-button"
+          onClick={(e) => {
+            addItemToCart(e);
+          }}
+        >
           Add to cart
         </button>
       </div>

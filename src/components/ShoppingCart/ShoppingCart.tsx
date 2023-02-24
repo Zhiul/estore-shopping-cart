@@ -82,7 +82,7 @@ export function ShoppingCart({ isActive, setActive }: ShoppingCartProps) {
 
         <div className="shopping-cart-checkout">
           <div className="shopping-cart-checkout-total">
-            Total: {totalPrice}$
+            Total: ${totalPrice}
           </div>
           <button className="main-button">Checkout</button>
         </div>
