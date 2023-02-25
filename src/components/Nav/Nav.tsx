@@ -31,11 +31,12 @@ export const Nav = ({ toggleShoppingCartIsOpen }: NavProps) => {
 
   function getShoppingCartItemsQuantity() {
     if (shoppingCartItems.items.length === 0) return 0;
-    console.log(shoppingCartItems);
-    return shoppingCartItems.items.reduce(
+    const quantity = shoppingCartItems.items.reduce(
       (quantity, item) => quantity + item.quantity,
       0
     );
+    if (quantity >= 100) return "+99";
+    return quantity;
   }
   const shoppingCartItemsQuantity = getShoppingCartItemsQuantity();
 

@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import ShopItems from "../data/ShopItems.json";
+
+import { CreateModal } from "../utils/createModal";
+import { CatalogueListItemModal } from "../components/Catalogue/CatalogueListItemModal";
 
 import { CatalogueFiltersList } from "../components/Catalogue/CatalogueFilterList";
 import { CatalogueList } from "../components/Catalogue/CatalogueList";
+import { ShopItem } from "../components/ShoppingCart/ShoppingCartTypes";
 
 export enum SHOP_CATEGORY_NAME {
   processor = "processor",
@@ -42,6 +47,34 @@ const initializeShopCategoryFilters = () => {
 };
 
 export const CataloguePage = () => {
+  const [itemModalIsActive, setItemModalIsActive] = useState(false);
+  const [item, setItem] = useState<ShopItem | undefined>(undefined);
+  const params = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!itemModalIsActive) navigate("/catalogue");
+  }, [itemModalIsActive]);
+
+  useEffect(() => {
+    const item = ShopItems.items.find((item) => item.id === params.itemid);
+    if (item) {
+      setItem(item);
+      setItemModalIsActive(true);
+    }
+  }, [location]);
+
+  const modal = CreateModal(
+    CatalogueListItemModal,
+    { item: item || ShopItems.items[0] },
+    itemModalIsActive,
+    setItemModalIsActive,
+    "overlay",
+    200,
+    true
+  );
+
   const [shopCategoryFilters, setShopCategoryFilters] = useState(
     initializeShopCategoryFilters()
   );
@@ -66,6 +99,7 @@ export const CataloguePage = () => {
       />
 
       <CatalogueList shopCategoryFilters={shopCategoryFilters} />
+      {modal}
     </div>
   );
 };

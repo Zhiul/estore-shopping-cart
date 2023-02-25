@@ -1,31 +1,18 @@
 import { ShopItem } from "../ShoppingCart/ShoppingCartTypes";
-import { useState } from "react";
-
-import { CatalogueListItemModal } from "./CatalogueListItemModal";
-import { CreateModal } from "../../utils/createModal";
+import { useNavigate } from "react-router-dom";
 
 interface catalogueListItemProps {
   item: ShopItem;
 }
 
 export const CatalogueListItem = ({ item }: catalogueListItemProps) => {
-  const [modalIsActive, setModalIsActive] = useState(false);
-
-  const Modal = CreateModal(
-    CatalogueListItemModal,
-    { item },
-    modalIsActive,
-    setModalIsActive,
-    "overlay",
-    200,
-    true
-  );
+  const navigate = useNavigate();
 
   return (
     <div
       className="catalogue-list-item"
       onClick={() => {
-        setModalIsActive(true);
+        navigate(`/catalogue/item/${item.id}`, { state: item });
       }}
     >
       <div className="catalogue-item-image">
@@ -34,7 +21,6 @@ export const CatalogueListItem = ({ item }: catalogueListItemProps) => {
 
       <h3 className="catalogue-item-title">{item.title}</h3>
       <div className="catalogue-list-item-price">${item.price}</div>
-      {Modal}
     </div>
   );
 };

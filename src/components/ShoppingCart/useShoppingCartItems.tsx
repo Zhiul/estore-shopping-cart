@@ -1,5 +1,4 @@
 import type { ShopItem } from "./ShoppingCartTypes";
-
 import { useReducer } from "react";
 import ShopItems from "../../data/ShopItems.json";
 
@@ -108,19 +107,14 @@ function shoppingCartItemsReducer(
 
       if (type === "change") {
         item.setQuantity(quantity);
-        if (quantity <= 0) {
-          newState.splice(itemIndex, 1);
-        }
-        return newState;
       } else if (type === "increase") {
         item.setQuantity(item.quantity + 1);
       } else if (type === "decrease") {
         item.setQuantity(item.quantity - 1);
-        if (item.quantity <= 0) {
-          newState.splice(itemIndex, 1);
-        }
-        return newState;
       }
+
+      if (item.quantity <= 0) item.quantity = 0;
+      if (item.quantity >= 50) item.quantity = 50;
 
       return newState;
     } else {

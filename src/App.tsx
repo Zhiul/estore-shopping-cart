@@ -39,7 +39,10 @@ function App() {
 
           <Routes>
             <Route path="/" element={<Home />}></Route>
-            <Route path="/catalogue" element={<CataloguePage />}></Route>
+            <Route
+              path="/catalogue/item?/:itemid?"
+              element={<CataloguePage />}
+            ></Route>
           </Routes>
         </BrowserRouter>
       </ShoppingCartItemsContext.Provider>

@@ -35,6 +35,7 @@ export function ShoppingCartItem({ item }: ShoppingCartProps) {
 
   function handleQuantityInput(e: React.ChangeEvent<HTMLInputElement>) {
     let quantity = parseInt(e.target.value);
+    e.target.value = quantity.toString();
     if (isNaN(quantity)) quantity = 0;
 
     ShoppingCartItems.dispatch({
