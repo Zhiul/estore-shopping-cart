@@ -54,19 +54,24 @@ export function ShoppingCartItem({ item }: ShoppingCartProps) {
 
         <div className="shopping-cart-item-container">
           <header>
-            <h4>{item.title}</h4>
+            <h3>{item.title}</h3>
 
             <button
               type="button"
               className="shopping-cart-item-close-button"
               onClick={removeItem}
+              aria-label="Remove item"
             >
               <CloseIcon />
             </button>
           </header>
 
           <div className="input-wrapper">
-            <button className="count-cta" onClick={decreaseQuantity}>
+            <button
+              className="count-cta"
+              onClick={decreaseQuantity}
+              aria-label="Reduce item quantity by one"
+            >
               -
             </button>
             <input
@@ -76,14 +81,20 @@ export function ShoppingCartItem({ item }: ShoppingCartProps) {
               onChange={(e) => {
                 handleQuantityInput(e);
               }}
+              aria-label="Item quantity"
             />
-            <button className="count-cta" onClick={increaseQuantity}>
+            <button
+              className="count-cta"
+              onClick={increaseQuantity}
+              aria-label="Increase item quantity by one"
+            >
               +
             </button>
           </div>
 
           <div className="shopping-cart-item-total-price">
-            Total: ${totalPrice}
+            <h4>Total:&nbsp;</h4>
+            <span>${totalPrice}</span>
           </div>
         </div>
       </div>

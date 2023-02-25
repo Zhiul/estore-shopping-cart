@@ -43,7 +43,7 @@ export function ShoppingCart({ isActive, setActive }: ShoppingCartProps) {
       <header className="shopping-cart-header">
         <div className="shopping-cart-header-title">
           <img src={shoppingCartIcon} alt="" />
-          <h3>Order summary</h3>
+          <h2>Order summary</h2>
         </div>
 
         <button
@@ -51,6 +51,7 @@ export function ShoppingCart({ isActive, setActive }: ShoppingCartProps) {
           onClick={() => {
             setActive(false);
           }}
+          aria-label="Close order summary"
         >
           <CloseIcon aria-hidden="true"></CloseIcon>
         </button>
@@ -82,7 +83,8 @@ export function ShoppingCart({ isActive, setActive }: ShoppingCartProps) {
 
         <div className="shopping-cart-checkout">
           <div className="shopping-cart-checkout-total">
-            Total: ${totalPrice}
+            <h4>Total:&nbsp;</h4>
+            <span>${totalPrice}</span>
           </div>
           <button className="main-button">Checkout</button>
         </div>

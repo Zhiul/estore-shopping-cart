@@ -20,7 +20,9 @@ export const CatalogueListItem = ({ item }: catalogueListItemProps) => {
       </div>
 
       <h3 className="catalogue-item-title">{item.title}</h3>
-      <div className="catalogue-list-item-price">${item.price}</div>
+      <div className="catalogue-list-item-price" aria-label="Price:">
+        {"$" + item.price}
+      </div>
     </div>
   );
 };

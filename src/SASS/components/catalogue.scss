@@ -132,6 +132,11 @@
   overflow: hidden;
   opacity: 1;
 
+  @include lg-breakpoint {
+    max-width: 675px;
+    max-height: 536px;
+  }
+
   &[data-active="false"] {
     opacity: 0;
   }

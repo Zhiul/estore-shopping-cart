@@ -4,7 +4,7 @@ import { useState, createContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { CreateModal } from "./utils/createModal";
-import { Nav } from "./components/Nav/Nav";
+import { Header } from "./components/Header/Header";
 import { Home } from "./pages/Home";
 import { CataloguePage } from "./pages/Catalogue";
 import { ShoppingCart } from "./components/ShoppingCart/ShoppingCart";
@@ -34,7 +34,7 @@ function App() {
     <>
       <ShoppingCartItemsContext.Provider value={shoppingCartItems}>
         <BrowserRouter>
-          <Nav toggleShoppingCartIsOpen={toggleShoppingCartIsOpen} />
+          <Header toggleShoppingCartIsOpen={toggleShoppingCartIsOpen} />
           {ShoppingCartModal}
 
           <Routes>

@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { ShoppingCartItemsContext } from "../../App";
 
 import { CreateModal } from "../../utils/createModal";
-import { NavLinks } from "./NavLinks";
+import { NavLinks } from "./Nav";
 
 import logo from "../../assets/logo-icon-coloured.png";
 import { ReactComponent as ShoppingCartIcon } from "../../assets/shopping-cart-open-cta-icon.svg";
@@ -13,21 +13,19 @@ interface NavProps {
   toggleShoppingCartIsOpen: () => void;
 }
 
-export const Nav = ({ toggleShoppingCartIsOpen }: NavProps) => {
+export const Header = ({ toggleShoppingCartIsOpen }: NavProps) => {
   const shoppingCartItems = useContext(ShoppingCartItemsContext);
 
   const [navigationDropdownIsOpen, setNavigationDropdownIsOpen] =
     useState(false);
-  const NavLinksModal = CreateModal(
-    NavLinks,
-    {},
-    navigationDropdownIsOpen,
-    setNavigationDropdownIsOpen,
-    "overlay overlay-transparent",
-    200,
-    false,
-    768
-  );
+
+  const burgerMenuAriaLabel = navigationDropdownIsOpen
+    ? "Close main menu"
+    : "Open main menu";
+
+  function toggleNavigationDropdown() {
+    setNavigationDropdownIsOpen(!navigationDropdownIsOpen);
+  }
 
   function getShoppingCartItemsQuantity() {
     if (shoppingCartItems.items.length === 0) return 0;
@@ -40,12 +38,19 @@ export const Nav = ({ toggleShoppingCartIsOpen }: NavProps) => {
   }
   const shoppingCartItemsQuantity = getShoppingCartItemsQuantity();
 
-  function toggleNavigationDropdown() {
-    setNavigationDropdownIsOpen(!navigationDropdownIsOpen);
-  }
+  const NavLinksModal = CreateModal(
+    NavLinks,
+    {},
+    navigationDropdownIsOpen,
+    setNavigationDropdownIsOpen,
+    "overlay overlay-transparent",
+    200,
+    false,
+    768
+  );
 
   return (
-    <nav>
+    <header className="main-header">
       <div className="wrapper">
         <div className="title">
           <img className="logo" src={logo} alt="" />
@@ -63,7 +68,7 @@ export const Nav = ({ toggleShoppingCartIsOpen }: NavProps) => {
             <ShoppingCartIcon aria-hidden="true"></ShoppingCartIcon>
             <span
               className="shopping-cart-items-count"
-              aria-label="Number of added items"
+              aria-label="Number of items added"
             >
               {shoppingCartItemsQuantity}
             </span>
@@ -73,6 +78,7 @@ export const Nav = ({ toggleShoppingCartIsOpen }: NavProps) => {
             className="nav-button burger-menu"
             data-open={navigationDropdownIsOpen ? "true" : "false"}
             onClick={toggleNavigationDropdown}
+            aria-label={burgerMenuAriaLabel}
           >
             <span className="burger-menu-icon">
               <img
@@ -85,6 +91,6 @@ export const Nav = ({ toggleShoppingCartIsOpen }: NavProps) => {
           </button>
         </div>
       </div>
-    </nav>
+    </header>
   );
 };
