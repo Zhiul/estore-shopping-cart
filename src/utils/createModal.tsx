@@ -1,8 +1,15 @@
-import { ComponentType, useLayoutEffect, useState, useRef } from "react";
+import {
+  ComponentType,
+  useLayoutEffect,
+  useState,
+  useRef,
+  useEffect,
+} from "react";
 import { createPortal } from "react-dom";
 import { useLockedBody } from "usehooks-ts";
 import { useWindowResolution } from "./useWindowResolution";
 import { isNumber } from "lodash";
+import { playAnimation } from "./playAnimation";
 
 export function CreateModal<T>(
   Component: ComponentType<T>,
@@ -14,6 +21,8 @@ export function CreateModal<T>(
   isPortal: boolean = false,
   maxWidth: number | "unset" = "unset"
 ) {
+  const overlay = useRef(null);
+
   const modal = (
     <>
       <div
@@ -23,6 +32,7 @@ export function CreateModal<T>(
           e.stopPropagation();
           setActive(false);
         }}
+        ref={overlay}
       ></div>
 
       <Component
@@ -48,8 +58,12 @@ export function CreateModal<T>(
 
       setTimeout(() => {
         setAnimationIsRunning(false);
-      }, animationDuration);
+      }, animationDuration + 200);
     }
+  }, [isActive, animationDuration]);
+
+  useEffect(() => {
+    playAnimation(overlay, isActive ? "appearing" : "disappearing");
   }, [isActive]);
 
   if (isNumber(maxWidth) && isActive && windowResolution.width > maxWidth)

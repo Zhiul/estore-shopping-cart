@@ -6,12 +6,12 @@ import { useModalAnimation } from "../../utils/useModalAnimation";
 import homeIcon from "../../assets/home.svg";
 import catalogueIcon from "../../assets/small-shop.svg";
 
-interface NavLinksProps {
+interface NavProps {
   isActive: boolean;
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const NavLinks = ({ isActive, setActive }: NavLinksProps) => {
+export const Nav = ({ isActive, setActive }: NavProps) => {
   const element = useRef(null);
   useModalAnimation(element, isActive);
 
@@ -20,10 +20,15 @@ export const NavLinks = ({ isActive, setActive }: NavLinksProps) => {
   }
 
   return (
-    <nav>
-      <ul className="nav-links" data-visible={isActive} ref={element}>
+    <nav aria-label="Main menu" data-visible={isActive} ref={element}>
+      <ul className="nav-links">
         <li>
-          <NavLink className="nav-link" to="./" onClick={setIsActiveToFalse}>
+          <NavLink
+            className="nav-link"
+            to="/"
+            onClick={setIsActiveToFalse}
+            data-testid="main-menu-link-1"
+          >
             <span className="nav-link-icon">
               <img src={homeIcon} alt="" />
             </span>
@@ -34,8 +39,9 @@ export const NavLinks = ({ isActive, setActive }: NavLinksProps) => {
         <li>
           <NavLink
             className="nav-link"
-            to="./catalogue"
+            to="/catalogue"
             onClick={setIsActiveToFalse}
+            data-testid="main-menu-link-2"
           >
             <span className="nav-link-icon">
               <img src={catalogueIcon} alt="" />

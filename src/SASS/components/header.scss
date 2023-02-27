@@ -17,8 +17,47 @@
   position: relative;
 }
 
+@keyframes toggleNavVisibility {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 nav {
   display: inline-flex;
+
+  @include sm-breakpoint {
+    position: fixed;
+    top: 68px;
+    right: 20px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+
+    &[data-animation="opening"] {
+      visibility: visible;
+      animation: toggleNavVisibility 200ms ease-in-out;
+    }
+
+    &[data-animation="closing"] {
+      visibility: visible;
+      animation: toggleNavVisibility 200ms ease-in-out reverse;
+    }
+
+    &[data-visible="true"] {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    &[data-visible="false"] {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
 }
 
 h1 {
@@ -35,49 +74,17 @@ h1 {
   gap: 10px;
 }
 
-@keyframes toggleNavLinksVisibility {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
 .nav-links {
   display: flex;
 
   @include sm-breakpoint {
-    width: 170px;
+    width: calc(9.5rem + 16px);
     padding: 13px 6px 45px 6px;
     flex-direction: column;
     gap: 8px;
-    position: fixed;
-    top: 68px;
-    right: 20px;
     background-color: var(--mainColor);
     box-shadow: -5px 1px 6px 0px #0474db;
-    opacity: 0;
     border-radius: 9px;
-    z-index: 1000;
-
-    &[data-animation="opening"] {
-      animation: toggleNavLinksVisibility 200ms ease-in-out;
-    }
-
-    &[data-animation="closing"] {
-      animation: toggleNavLinksVisibility 200ms ease-in-out reverse;
-    }
-
-    &[data-visible="true"] {
-      opacity: 1;
-    }
-
-    &[data-visible="false"] {
-      opacity: 0;
-      pointer-events: none;
-    }
   }
 
   @include lg-breakpoint {
@@ -102,7 +109,7 @@ h1 {
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
-    width: 156px;
+    width: 9.5rem;
     transition: background-color 200ms ease-in-out;
 
     &.active {
@@ -139,6 +146,10 @@ h1 {
   display: inline-block;
   width: 22px;
   height: 22px;
+
+  img {
+    display: block;
+  }
 }
 
 .nav-buttons {
@@ -156,6 +167,7 @@ h1 {
 }
 
 .shopping-cart-button {
+  align-self: center;
   cursor: pointer;
   color: var(--mainColor);
   transition: color 200ms ease-in-out;

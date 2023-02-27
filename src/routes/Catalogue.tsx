@@ -1,13 +1,12 @@
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import ShopItems from "../data/ShopItems.json";
+import { useState } from "react";
+import { Outlet } from "react-router-dom";
 
-import { CreateModal } from "../utils/createModal";
-import { CatalogueListItemModal } from "../components/Catalogue/CatalogueListItemModal";
-
+import { Header } from "../components/Header/Header";
 import { CatalogueFiltersList } from "../components/Catalogue/CatalogueFilterList";
 import { CatalogueList } from "../components/Catalogue/CatalogueList";
-import { ShopItem } from "../components/ShoppingCart/ShoppingCartTypes";
+
+import ShopItems from "../data/ShopItems.json";
+import { useShoppingCartModal } from "../components/ShoppingCart/useShoppingCartModal";
 
 export enum SHOP_CATEGORY_NAME {
   processor = "processor",
@@ -47,33 +46,7 @@ const initializeShopCategoryFilters = () => {
 };
 
 export const CataloguePage = () => {
-  const [itemModalIsActive, setItemModalIsActive] = useState(false);
-  const [item, setItem] = useState<ShopItem | undefined>(undefined);
-  const params = useParams();
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  useEffect(() => {
-    if (!itemModalIsActive) navigate("/catalogue");
-  }, [itemModalIsActive]);
-
-  useEffect(() => {
-    const item = ShopItems.items.find((item) => item.id === params.itemid);
-    if (item) {
-      setItem(item);
-      setItemModalIsActive(true);
-    }
-  }, [location]);
-
-  const modal = CreateModal(
-    CatalogueListItemModal,
-    { item: item || ShopItems.items[0] },
-    itemModalIsActive,
-    setItemModalIsActive,
-    "overlay",
-    200,
-    true
-  );
+  const [ShoppingCartModal, toggleShoppingCartModal] = useShoppingCartModal();
 
   const [shopCategoryFilters, setShopCategoryFilters] = useState(
     initializeShopCategoryFilters()
@@ -92,14 +65,19 @@ export const CataloguePage = () => {
   }
 
   return (
-    <div className="wrapper">
-      <CatalogueFiltersList
-        shopCategoryFilters={shopCategoryFilters}
-        toggleCategoryFiltersList={toggleCategoryFiltersList}
-      />
+    <>
+      <Header toggleShoppingCartModal={toggleShoppingCartModal} />
+      {ShoppingCartModal}
+      <div className="wrapper">
+        <CatalogueFiltersList
+          shopCategoryFilters={shopCategoryFilters}
+          toggleCategoryFiltersList={toggleCategoryFiltersList}
+        />
 
-      <CatalogueList shopCategoryFilters={shopCategoryFilters} />
-      {modal}
-    </div>
+        <CatalogueList shopCategoryFilters={shopCategoryFilters} />
+
+        <Outlet />
+      </div>
+    </>
   );
 };

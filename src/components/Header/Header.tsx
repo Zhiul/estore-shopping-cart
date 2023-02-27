@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { ShoppingCartItemsContext } from "../../App";
 
 import { CreateModal } from "../../utils/createModal";
-import { NavLinks } from "./Nav";
+import { Nav } from "./Nav";
 
 import logo from "../../assets/logo-icon-coloured.png";
 import { ReactComponent as ShoppingCartIcon } from "../../assets/shopping-cart-open-cta-icon.svg";
@@ -10,10 +10,10 @@ import openBurgerMenu from "../../assets/hamburger_icon.svg";
 import { ReactComponent as CloseIcon } from "../../assets/close.svg";
 
 interface NavProps {
-  toggleShoppingCartIsOpen: () => void;
+  toggleShoppingCartModal: () => void;
 }
 
-export const Header = ({ toggleShoppingCartIsOpen }: NavProps) => {
+export const Header = ({ toggleShoppingCartModal }: NavProps) => {
   const shoppingCartItems = useContext(ShoppingCartItemsContext);
 
   const [navigationDropdownIsOpen, setNavigationDropdownIsOpen] =
@@ -38,8 +38,8 @@ export const Header = ({ toggleShoppingCartIsOpen }: NavProps) => {
   }
   const shoppingCartItemsQuantity = getShoppingCartItemsQuantity();
 
-  const NavLinksModal = CreateModal(
-    NavLinks,
+  const NavModal = CreateModal(
+    Nav,
     {},
     navigationDropdownIsOpen,
     setNavigationDropdownIsOpen,
@@ -57,13 +57,13 @@ export const Header = ({ toggleShoppingCartIsOpen }: NavProps) => {
           <h1>EStore</h1>
         </div>
 
-        {NavLinksModal}
+        {NavModal}
 
         <div className="nav-buttons">
           <button
             className="nav-button shopping-cart-button"
-            aria-label="Open shopping Cart"
-            onClick={toggleShoppingCartIsOpen}
+            aria-label="Open shopping cart"
+            onClick={toggleShoppingCartModal}
           >
             <ShoppingCartIcon aria-hidden="true"></ShoppingCartIcon>
             <span

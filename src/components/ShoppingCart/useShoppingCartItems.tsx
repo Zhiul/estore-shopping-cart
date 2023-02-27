@@ -52,7 +52,7 @@ type shoppingCartAction =
   | shoppingCartIncreaseItemQuantity
   | shoppingCartDecreaseItemQuantity;
 
-class ShoppingCartItem {
+export class ShoppingCartItem {
   title: string;
   description: string;
   category: string;

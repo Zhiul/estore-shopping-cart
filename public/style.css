@@ -76,6 +76,26 @@ img {
   box-shadow: 0px 1px 13px 5px rgba(10, 157, 220, 0.39);
 }
 
+@keyframes fadingIn {
+  from {
+    opacity: 100%;
+    pointer-events: none;
+  }
+  to {
+    opacity: 0%;
+    pointer-events: none;
+  }
+}
+@keyframes fadingOut {
+  from {
+    opacity: 0%;
+    pointer-events: none;
+  }
+  to {
+    opacity: 100%;
+    pointer-events: none;
+  }
+}
 .overlay {
   position: fixed;
   inset: 0px 0px 0px 0px;
@@ -124,8 +144,42 @@ img {
   position: relative;
 }
 
+@keyframes toggleNavVisibility {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 nav {
   display: inline-flex;
+}
+@media only screen and (max-width: 768px) {
+  nav {
+    position: fixed;
+    top: 68px;
+    right: 20px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+  }
+  nav[data-animation=opening] {
+    visibility: visible;
+    animation: toggleNavVisibility 200ms ease-in-out;
+  }
+  nav[data-animation=closing] {
+    visibility: visible;
+    animation: toggleNavVisibility 200ms ease-in-out reverse;
+  }
+  nav[data-visible=true] {
+    visibility: visible;
+    opacity: 1;
+  }
+  nav[data-visible=false] {
+    opacity: 0;
+    pointer-events: none;
+  }
 }
 
 h1 {
@@ -142,44 +196,18 @@ h1 {
   gap: 10px;
 }
 
-@keyframes toggleNavLinksVisibility {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
 .nav-links {
   display: flex;
 }
 @media only screen and (max-width: 768px) {
   .nav-links {
-    width: 170px;
+    width: calc(9.5rem + 16px);
     padding: 13px 6px 45px 6px;
     flex-direction: column;
     gap: 8px;
-    position: fixed;
-    top: 68px;
-    right: 20px;
     background-color: var(--mainColor);
     box-shadow: -5px 1px 6px 0px #0474db;
-    opacity: 0;
     border-radius: 9px;
-    z-index: 1000;
-  }
-  .nav-links[data-animation=opening] {
-    animation: toggleNavLinksVisibility 200ms ease-in-out;
-  }
-  .nav-links[data-animation=closing] {
-    animation: toggleNavLinksVisibility 200ms ease-in-out reverse;
-  }
-  .nav-links[data-visible=true] {
-    opacity: 1;
-  }
-  .nav-links[data-visible=false] {
-    opacity: 0;
-    pointer-events: none;
   }
 }
 @media only screen and (min-width: 768px) {
@@ -206,7 +234,7 @@ h1 {
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
-    width: 156px;
+    width: 9.5rem;
     transition: background-color 200ms ease-in-out;
   }
   .nav-link.active {
@@ -240,6 +268,9 @@ h1 {
   width: 22px;
   height: 22px;
 }
+.nav-link-icon img {
+  display: block;
+}
 
 .nav-buttons {
   display: flex;
@@ -256,6 +287,7 @@ h1 {
 }
 
 .shopping-cart-button {
+  align-self: center;
   cursor: pointer;
   color: var(--mainColor);
   transition: color 200ms ease-in-out;
@@ -339,15 +371,19 @@ h1 {
   background-color: #ebe9e9;
   z-index: 1000;
   border-radius: 10px;
+  visibility: hidden;
 }
 .shopping-cart[data-open=true] {
   opacity: 1;
   pointer-events: all;
+  visibility: visible;
 }
 .shopping-cart[data-animation=opening] {
+  visibility: visible;
   animation: shoppingCartModalAppearing 200ms ease-in-out;
 }
 .shopping-cart[data-animation=closing] {
+  visibility: visible;
   animation: shoppingCartModalAppearing 200ms ease-in-out reverse;
 }
 @media only screen and (min-width: 768px) {
@@ -395,10 +431,14 @@ h1 {
   cursor: pointer;
   width: 32px;
   height: 32px;
-  margin-right: 48px;
   background: none;
   border: 0px;
   color: #232222;
+}
+@media only screen and (min-width: 768px) {
+  .shopping-cart-close {
+    margin-right: 48px;
+  }
 }
 .shopping-cart-close svg {
   display: inline-block;
@@ -729,7 +769,7 @@ h1 {
   height: 90vh;
   z-index: 1000;
   border-radius: 12px;
-  overflow: hidden;
+  overflow: auto;
   opacity: 1;
 }
 @media only screen and (min-width: 768px) {
@@ -765,6 +805,12 @@ h1 {
 }
 .catalogue-list-item-modal-image img {
   width: 200px;
+  height: 200px;
+  border-radius: 20px;
+}
+
+.catalogue-list-item-modal-description {
+  margin-bottom: 16px;
 }
 
 .catalogue-list-item-text {

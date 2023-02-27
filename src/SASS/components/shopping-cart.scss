@@ -33,17 +33,21 @@
   background-color: #ebe9e9;
   z-index: 1000;
   border-radius: 10px;
+  visibility: hidden;
 
   &[data-open="true"] {
     opacity: 1;
     pointer-events: all;
+    visibility: visible;
   }
 
   &[data-animation="opening"] {
+    visibility: visible;
     animation: shoppingCartModalAppearing 200ms ease-in-out;
   }
 
   &[data-animation="closing"] {
+    visibility: visible;
     animation: shoppingCartModalAppearing 200ms ease-in-out reverse;
   }
 
@@ -94,7 +98,9 @@
   cursor: pointer;
   width: 32px;
   height: 32px;
-  margin-right: 48px;
+  @include lg-breakpoint {
+    margin-right: 48px;
+  }
   background: none;
   border: 0px;
   color: #232222;

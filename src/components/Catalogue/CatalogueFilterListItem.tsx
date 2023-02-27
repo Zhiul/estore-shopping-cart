@@ -1,4 +1,4 @@
-import { SHOP_CATEGORY_NAME } from "../../pages/Catalogue";
+import { SHOP_CATEGORY_NAME } from "../../routes/Catalogue";
 
 interface CatalogueFiltersListItemProps {
   name: SHOP_CATEGORY_NAME;

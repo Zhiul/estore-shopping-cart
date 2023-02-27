@@ -46,7 +46,7 @@ export function ShoppingCartItem({ item }: ShoppingCartProps) {
   }
 
   return (
-    <div className="shopping-cart-item">
+    <div className="shopping-cart-item" aria-label="Shopping cart item">
       <div className="shopping-cart-item-wrapper">
         <div className="catalogue-item-image">
           <img src={item.image} alt="" />
@@ -93,8 +93,8 @@ export function ShoppingCartItem({ item }: ShoppingCartProps) {
           </div>
 
           <div className="shopping-cart-item-total-price">
-            <h4>Total:&nbsp;</h4>
-            <span>${totalPrice}</span>
+            <h4 aria-label="Item total price:">Total:&nbsp;</h4>
+            <span aria-label={`$${totalPrice}`}>${totalPrice}</span>
           </div>
         </div>
       </div>

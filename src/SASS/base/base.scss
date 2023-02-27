@@ -77,6 +77,30 @@ img {
   }
 }
 
+@keyframes fadingIn {
+  from {
+    opacity: 100%;
+    pointer-events: none;
+  }
+
+  to {
+    opacity: 0%;
+    pointer-events: none;
+  }
+}
+
+@keyframes fadingOut {
+  from {
+    opacity: 0%;
+    pointer-events: none;
+  }
+
+  to {
+    opacity: 100%;
+    pointer-events: none;
+  }
+}
+
 .overlay {
   position: fixed;
   inset: 0px 0px 0px 0px;

@@ -11,15 +11,19 @@ export const CatalogueListItem = ({ item }: catalogueListItemProps) => {
   return (
     <div
       className="catalogue-list-item"
+      role="link"
       onClick={() => {
-        navigate(`/catalogue/item/${item.id}`, { state: item });
+        navigate(`/catalogue/item/${item.id}`);
       }}
+      aria-labelledby={`item-${item.id}`}
     >
       <div className="catalogue-item-image">
         <img src={item.image} alt="" />
       </div>
 
-      <h3 className="catalogue-item-title">{item.title}</h3>
+      <h3 className="catalogue-item-title" id={`item-${item.id}`}>
+        {item.title}
+      </h3>
       <div className="catalogue-list-item-price" aria-label="Price:">
         {"$" + item.price}
       </div>

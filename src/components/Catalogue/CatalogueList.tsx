@@ -1,4 +1,4 @@
-import { shopCategoryFilter } from "../../pages/Catalogue";
+import { shopCategoryFilter } from "../../routes/Catalogue";
 
 import { CatalogueListItem } from "./CatalogueListItem";
 import ShopItems from "../../data/ShopItems.json";
@@ -13,7 +13,7 @@ export const CatalogueList = ({ shopCategoryFilters }: CatalogueListProps) => {
   return (
     <main>
       <h2 className="heading">Items</h2>
-      <ul className="catalogue-list">
+      <ul className="catalogue-list" aria-label="Items list">
         {ShopItems.items.map((item) => {
           if (enabledFilters.length >= 1) {
             if (enabledFilters.find((filter) => filter.name === item.category))
@@ -29,6 +29,8 @@ export const CatalogueList = ({ shopCategoryFilters }: CatalogueListProps) => {
               </li>
             );
           }
+
+          return null;
         })}
       </ul>
     </main>

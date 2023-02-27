@@ -15,5 +15,5 @@ export const useModalAnimation = (
     }
     const animation = isActive ? "opening" : "closing";
     playAnimation(element, animation);
-  }, [isActive]);
+  }, [isActive, element, isPortal]);
 };

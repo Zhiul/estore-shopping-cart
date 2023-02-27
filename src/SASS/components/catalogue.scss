@@ -129,7 +129,7 @@
   height: 90vh;
   z-index: 1000;
   border-radius: 12px;
-  overflow: hidden;
+  overflow: auto;
   opacity: 1;
 
   @include lg-breakpoint {
@@ -170,7 +170,13 @@
 
   img {
     width: 200px;
+    height: 200px;
+    border-radius: 20px;
   }
+}
+
+.catalogue-list-item-modal-description {
+  margin-bottom: 16px;
 }
 
 .catalogue-list-item-text {
